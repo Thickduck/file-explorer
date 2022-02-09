@@ -33,7 +33,16 @@ def del_file():
         mb.showerror('Error', "The file is not found!")
 
 
-def rename():
+def del_folder():
+    src = filedialog.askdirectory()
+    if os.path.exists(src):
+        os.rmdir(src)
+        mb.showinfo('Task finished successfully', "Folder Deleted")
+    else:
+        mb.showerror('Error', "The folder is not found!")
+
+
+def rename_file():
     src = open_window()
     path = os.path.dirname(src)
     ext = os.path.splitext(src)[1]
@@ -48,9 +57,26 @@ def rename():
     else:
         pass
 
+    mb.showinfo('Task finished successfully', "File Renamed")
     exit()
 
-    mb.showinfo('Task finished successfully', "File Renamed")
+
+def move_file():
+    src = open_window()
+    dest = filedialog.askdirectory()
+
+    shutil.move(src, dest)
+    mb.showinfo('confirmation', "Item(s) moved")
 
 
-del_file()
+def make_folder():
+    path = filedialog.askdirectory()
+    name = input('Enter a name for the folder:\n')
+    if os.path.exists(path):
+        os.mkdir(os.path.join(path, name))
+        mb.showinfo('confirmation', "Folder created")
+    else:
+        mb.showerror('Error', "The folder is not found!")
+    exit()
+
+

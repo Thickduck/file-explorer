@@ -28,6 +28,7 @@ def del_file():
     src = open_window()
     if os.path.exists(src):
         os.remove(src)
+        mb.showinfo('Task finished successfully', "File Deleted")
     else:
         mb.showerror('Error', "The file is not found!")
 
@@ -40,18 +41,16 @@ def rename():
 
     new_path = os.path.join(path, name+ext)
 
-    loop = True
-    while loop:
-        conf = input(str(name)+" is the name you choose? Y/N\n")
-        conf = conf.lower()
-        if conf == 'y':
-            os.rename(src, new_path)
-            loop = False
-            break
-        else:
-            pass
+    conf = input(str(name)+" is the name you choose? Y/N\n")
+    conf = conf.lower()
+    if conf == 'y':
+        os.rename(src, new_path)
+    else:
+        pass
+
+    exit()
 
     mb.showinfo('Task finished successfully', "File Renamed")
 
 
-rename()
+del_file()

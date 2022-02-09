@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox as mb
 from tkinter import filedialog
+from tkinter import simpledialog
 import shutil
 import easygui
 import os
@@ -46,19 +47,12 @@ def rename_file():
     src = open_window()
     path = os.path.dirname(src)
     ext = os.path.splitext(src)[1]
-    name = input('Enter a new name for the file:\n')
+    name = simpledialog.askstring('Rename', 'Enter a new name for the file:')
 
     new_path = os.path.join(path, name+ext)
-
-    conf = input(str(name)+" is the name you choose? Y/N\n")
-    conf = conf.lower()
-    if conf == 'y':
-        os.rename(src, new_path)
-    else:
-        pass
+    os.rename(src, new_path)
 
     mb.showinfo('Task finished successfully', "File Renamed")
-    exit()
 
 
 def move_file():
@@ -71,12 +65,11 @@ def move_file():
 
 def make_folder():
     path = filedialog.askdirectory()
-    name = input('Enter a name for the folder:\n')
+    name = simpledialog.askstring("Make Folder", "Enter a name for the folder:")
     if os.path.exists(path):
         os.mkdir(os.path.join(path, name))
         mb.showinfo('confirmation', "Folder created")
     else:
         mb.showerror('Error', "The folder is not found!")
-    exit()
 
 
